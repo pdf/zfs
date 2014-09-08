@@ -13,7 +13,9 @@ end
 action :create do
   unless created?
     Chef::Log.info("Creating zfs #{@zfs.name}")
-    system("zfs create #{@zfs.name}")
+    args = ''
+    args += '-p ' if new_resource.parents
+    system("zfs create #{args} #{@zfs.name}")
 
     # update properties for new zfs
     @zfs.info(info?)
@@ -45,7 +47,7 @@ def created?
   @zfs.info.exitstatus.zero?
 end
 
-def current_props? 
+def current_props?
   prop_hash = {}
   @zfs.info.stdout.split("\n").each do |line|
     l = line.split
