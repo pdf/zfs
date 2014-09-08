@@ -5,6 +5,7 @@ attribute :mountpoint, :kind_of => String, :default => nil
 attribute :zoned, :kind_of => String, :equal_to => [ "on", "off"],  :default => "off"
 attribute :recordsize, :kind_of => String, :default => "128K"
 attribute :atime, :kind_of => String, :equal_to => [ "on", "off"], :default => "on"
+attribute :parents, :kind_of => [TrueClass, FalseClass], :default => true
 
 attribute :info, :kind_of => Mixlib::ShellOut, :default => nil
 attribute :current_props, :kind_of => Hash, :default => nil
